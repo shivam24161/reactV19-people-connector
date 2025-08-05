@@ -32,7 +32,7 @@ const Signup = () => {
             className="w-full px-3 py-2 border rounded" required />
           <input type="password" name="password" placeholder="Password" onChange={handleChange}
             className="w-full px-3 py-2 border rounded" required />
-          <button type="submit" className="w-full py-2 bg-green-500 text-white rounded hover:bg-green-600">
+          <button type="submit" className="cursor-pointer w-full py-2 bg-green-500 text-white rounded hover:bg-green-600">
             Signup
           </button>
         </form>

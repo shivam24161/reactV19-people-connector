@@ -79,7 +79,7 @@ const Dashboard = () => {
             dispatch(logout());
             navigate('/login');
           }}
-          className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+          className="cursor-pointer bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
         >
           Logout
         </button>
@@ -97,13 +97,13 @@ const Dashboard = () => {
               <div className="space-x-2">
                 <button
                   onClick={() => acceptFriend(req._id)}
-                  className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                  className="cursor-pointer bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                 >
                   Accept
                 </button>
                 <button
                   onClick={() => cancelRequest(req._id)}
-                  className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+                  className="cursor-pointer bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                 >
                   Cancel
                 </button>
@@ -124,7 +124,7 @@ const Dashboard = () => {
               <span>{friend.name} ({friend.email})</span>
               <button
                 onClick={() => unfriend(friend._id)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                className="cursor-pointer bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
               >
                 Unfriend
               </button>

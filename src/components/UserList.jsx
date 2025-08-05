@@ -88,7 +88,7 @@ const UserList = () => {
                   {!youRequested && (
                     <button
                       onClick={() => sendFriendRequest(u._id)}
-                      className="bg-blue-500 text-white px-2 py-1 rounded"
+                      className="cursor-pointer bg-blue-500 text-white px-2 py-1 rounded"
                     >
                       Add
                     </button>
@@ -96,14 +96,14 @@ const UserList = () => {
                   {youRequested && (
                     <button
                       onClick={() => cancelRequest(u._id)}
-                      className="bg-gray-500 text-white px-2 py-1 rounded"
+                      className="cursor-pointer bg-gray-500 text-white px-2 py-1 rounded"
                     >
                       Cancel
                     </button>
                   )}
                   <button
                     onClick={() => blockUser(u._id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="cursor-pointer bg-red-500 text-white px-2 py-1 rounded"
                   >
                     Block
                   </button>
