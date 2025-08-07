@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../constants/Api';
 import UserList from './UserList';
+import PostForm from './PostForm';
+import PostFeed from './PostFeed';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -67,12 +69,12 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 max-w-6xl mx-auto">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-gray-600">Welcome, {user?.name} ({user?.email})</p>
+          {/* <h1 className="text-3xl font-bold">Welcome, {user?.name} ({user?.email})</h1> */}
+          <h1 className="text-3xl font-bold">Welcome, {user?.email}</h1>
         </div>
         <button
           onClick={() => {
@@ -84,59 +86,61 @@ const Dashboard = () => {
           Logout
         </button>
       </div>
-
-      {/* Friend Requests */}
-      <div className="bg-white rounded-md shadow p-5 mb-6">
-        <h2 className="text-xl font-semibold mb-4 border-b pb-2">Friend Requests</h2>
-        {user?.friendRequests.length === 0 ? (
-          <p className="text-gray-500">No incoming friend requests.</p>
-        ) : (
-          user?.friendRequests.map(req => (
-            <div key={req._id} className="flex justify-between items-center py-2 border-b last:border-b-0">
-              <span>{req.name} ({req.email})</span>
-              <div className="space-x-2">
-                <button
-                  onClick={() => acceptFriend(req._id)}
-                  className="cursor-pointer bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={() => cancelRequest(req._id)}
-                  className="cursor-pointer bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-
-      {/* Friends List */}
-      <div className="bg-white rounded-md shadow p-5 mb-6">
-        <h2 className="text-xl font-semibold mb-4 border-b pb-2">Your Friends</h2>
-        {user?.friends.length === 0 ? (
-          <p className="text-gray-500">You don’t have any friends yet.</p>
-        ) : (
-          user?.friends.map(friend => (
-            <div key={friend._id} className="flex justify-between items-center py-2 border-b last:border-b-0">
-              <span>{friend.name} ({friend.email})</span>
-              <button
-                onClick={() => unfriend(friend._id)}
-                className="cursor-pointer bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-              >
-                Unfriend
-              </button>
-            </div>
-          ))
-        )}
-      </div>
-
-      {/* All Users */}
-      <div className="bg-white rounded-md shadow p-5">
-        <h2 className="text-xl font-semibold mb-4 border-b pb-2">Explore Users</h2>
-        <UserList />
+      <div className="flex gap-8">
+        <div>
+          <PostForm onPostCreated={fetchProfile} />
+          <PostFeed />
+          {/* All Users */}
+          <UserList />
+        </div>
+        <div>
+          {/* Friend Requests */}
+          <div className="bg-white rounded-md shadow p-5 mb-6">
+            <h2 className="text-xl font-semibold mb-4 border-b pb-2">Friend Requests</h2>
+            {user?.friendRequests.length === 0 ? (
+              <p className="text-gray-500">No incoming friend requests.</p>
+            ) : (
+              user?.friendRequests.map(req => (
+                <div key={req._id} className="flex justify-between items-center py-2 border-b last:border-b-0">
+                  <span>{req.name} ({req.email})</span>
+                  <div className="space-x-2">
+                    <button
+                      onClick={() => acceptFriend(req._id)}
+                      className="cursor-pointer bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => cancelRequest(req._id)}
+                      className="cursor-pointer bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+          {/* Friends List */}
+          <div className="bg-white rounded-md shadow p-5 mb-6">
+            <h2 className="text-xl font-semibold mb-4 border-b pb-2">Your Friends</h2>
+            {user?.friends.length === 0 ? (
+              <p className="text-gray-500">You don’t have any friends yet.</p>
+            ) : (
+              user?.friends.map(friend => (
+                <div key={friend._id} className="flex justify-between items-center py-2 border-b last:border-b-0">
+                  <span>{friend.name} ({friend.email})</span>
+                  <button
+                    onClick={() => unfriend(friend._id)}
+                    className="cursor-pointer bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                  >
+                    Unfriend
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
